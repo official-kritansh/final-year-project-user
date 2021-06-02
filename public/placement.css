@@ -1,0 +1,17 @@
+#programs {
+    background-color: rgb(148, 155, 250);
+}
+
+a{
+    color: white;
+}
+
+#program {
+    background-color: #262626;
+    color: rgb(250, 191, 191);
+    margin: 10px;
+}
+
+a:hover{
+    color: white;
+}
