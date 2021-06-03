@@ -51,9 +51,11 @@ const userPlacementRoutes =require('./routes/user/placement');
 // mongoose config
 // const mongoURI = "mongodb+srv://muku:"+process.env.mongo_pass+"@cluster0.cxuqe.mongodb.net/stickman?retryWrites=true&w=majority"
 // mongoose.connect("mongodb://localhost/stickman_real_art");
-const mongoURI = "mongodb://localhost/final_year_project_v1";
+// const mongoURI = "mongodb://localhost/final_year_project_v1";
 // const mongoURI = "mongodb+srv://ankit:"+process.env.MLAB_PASS+"@cluster0-gyowo.mongodb.net/real_art?retryWrites=true&w=majority";
 // const mongoURI = "mongodb+srv://ankit:" + process.env.mongo_pass + "@cluster0.f8aql.mongodb.net/mravans_admin_v4?retryWrites=true&w=majority";
+const mongoURI ="mongodb+srv://kintu2676:"+process.env.mongo_pass+"@cluster0.kw5s2.mongodb.net/major_project?retryWrites=true&w=majority"
+
 //Mongo connection
 mongoose.connect(mongoURI);
 
