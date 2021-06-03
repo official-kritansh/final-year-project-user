@@ -57,7 +57,14 @@ const userPlacementRoutes =require('./routes/user/placement');
 const mongoURI ="mongodb+srv://kintu2676:"+process.env.mongo_pass+"@cluster0.kw5s2.mongodb.net/major_project?retryWrites=true&w=majority"
 
 //Mongo connection
-mongoose.connect(mongoURI);
+mongoose.connect(mongoURI,(err)=>{
+    if(err){
+        console.log(mongoURI)
+        console.log(err);
+    }else{
+        console.log('MongoDb Connected')
+    }
+});
 
 //PASSPORT config
 
