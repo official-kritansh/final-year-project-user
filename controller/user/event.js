@@ -4,6 +4,7 @@ const fs =require('fs'),
 path =require('path'),
 multer = require('multer'),
 { google } = require("googleapis");
+const { default: async } = require("async");
 
 var storage1 = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -253,5 +254,53 @@ module.exports = {
         }
       }
     });
+  },
+
+  f8uEvent(req,res){
+    Event.findOne({eid:req.params.eid},async (err,event)=>{
+      if(err){
+        req.flash("error", "Something Went Wrong!");
+        res.redirect("/");
+      }else{
+        if(!event){
+          req.flash("error", "Something Went Wrong!");
+          return res.redirect("back");
+        }else{
+          if(event.admin.toString()==req.user._id.toString() || event.coAdmins.includes(req.user._id)){
+            event.updates=event.updates.filter((e)=>{
+              return e!=req.params.uid;
+            })
+            await event.save();
+            return res.redirect("back");
+          }
+          req.flash("error", "Something Went Wrong!");
+          return res.redirect("back");
+        }
+      }
+    })
+  },
+
+  f9uEvent(req,res){
+    Event.findOne({eid:req.params.eid},async (err,event)=>{
+      if(err){
+        req.flash("error", "Something Went Wrong!");
+        res.redirect("/");
+      }else{
+        if(!event){
+          req.flash("error", "Something Went Wrong!");
+          return res.redirect("back");
+        }else{
+          if(event.admin.toString()==req.user._id.toString() || event.coAdmins.includes(req.user._id)){
+            event.files=event.files.filter((e)=>{
+              return e._id!=req.params.fid;
+            })
+            await event.save();
+            return res.redirect("back");
+          }
+          req.flash("error", "Something Went Wrong!");
+          return res.redirect("back");
+        }
+      }
+    })
   }
 };

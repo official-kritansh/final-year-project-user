@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/index.css">
     <script src="https://kit.fontawesome.com/42deadbeef.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <title>Document</title>
@@ -35,39 +35,55 @@
         <form id="1" action="/event/publish?eid=<%=event.eid%>" method="POST"></form>
         <form id="2" action="/event/add-content?eid=<%=event.eid%>" enctype="multipart/form-data" method="POST"></form>
         <form id="3" action="/event/invite?eid=<%=event.eid%>"  method="POST"></form>
-        <form class="form-signin">
-            <h2 class="form-signin-heading"><%=event.display_name%></h2><br><br>
-            <%if(isAdmin){%>
-                <p class="form-signin-heading"> Broadcast new message </p>
-                <input type="text" form="1" name="message" class="form-control" placeholder="Message" /><br>
-                <button form="1" class="btn btn-lg btn-primary btn-block" type="submit">Publish</button><br><br>
-            <%}%>
-            <%event.updates.forEach((u)=>{%>
-                <div><a> <%=u%></a></div>
-            <%})%>
+        <div id="totheleft">
+            <form class="form-signin">
+                <h2 class="form-signin-heading"><%=event.display_name%></h2><br><br>
+                <%if(isAdmin){%>
+                    <p class="form-signin-heading"> Broadcast new message </p>
+                    <input type="text" form="1" name="message" class="form-control" placeholder="Message" /><br>
+                    <button form="1" class="btn btn-lg btn-success btn-block" type="submit">Publish</button><br><br>
+                <%}%>
+    
+               
+                <%event.updates.forEach((u)=>{%>
+                    <div><a> <%=u%></a> </div>  
+                    <%if(isAdmin){%>
+                        <a href="/event/delete-update/<%=event.eid%>/<%=u%>" class="btn btn-sm btn-danger">Delete</a>
+                    <%}%>
+                <%})%>
+            </form>
+        </div>
+            <form class="form-signin">
             <br>
             <hr>
-            <h2 class="form-signin-heading">Resources</h2>
+            <div id="totheright">
+                <h2 class="form-signin-heading">Resources</h2>
             <%if(isAdmin){%>
                 <div>  UPLOAD NEW CONTENT  </div>
                 <input style="display: inline;" type="file" form="2" name="file" class="form-control" placeholder="File" /><br>
-                <button style="display: inline;" form="2" class="btn btn-sm btn-primary btn-block" type="submit">Submit</button><br><br>
+                <button style="display: inline;" form="2" class="btn btn-sm btn-success btn-block" type="submit">Submit</button><br><br>
             <%}%>
             <%event.files.forEach((f)=>{%>
-                <div> <a href="<%=f.url%>" target="_blank">  <%=f.name%> </a> </div>
+                <div> <a href="<%=f.url%>" target="_blank">  <%=f.name%> </a> </div> <%if(isAdmin){%>
+                    <a href="/event/delete-file/<%=event.eid%>/<%=f._id%>" class="btn btn-sm btn-danger">Delete</a>
+                <%}%>
             <%})%>
             <hr>
             <%if(isAdmin){%>
                 <div>  Invite Admin  <input type="text" form="3" name="email" placeholder="email" class="form-control"><br>
-                <button form="3" class="btn btn-lg btn-danger btn-block" type="submit">Invite</button></div>
+                <button form="3" class="btn btn-lg btn-success btn-block" type="submit">Invite</button></div>
             <%}%>
             <%users.forEach((u)=>{%>
-                <div> <%=u.email%></div>
+                <div> <%=u.email%></div>  <%if(isAdmin){%>
+                    <button style="color: red;">Remove admin</button>
+                <%}%>
             <%})%>
 
 
 
         </form>
+
+            </div>
     </div>
 </body>
 

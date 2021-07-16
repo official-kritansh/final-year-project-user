@@ -3,7 +3,7 @@ const { route } = require("./event");
 var router = express.Router({ mergeParams: true }),
     passport = require("passport"),
     User = require("../../models/user"),
-    { f1uAuth,f2uAuth,f3uAuth, f4uAuth,f5uAuth } = require("../../controller/user/auth"),
+    { f1uAuth,f2uAuth,f3uAuth, f4uAuth,f5uAuth,f6uAuth,f7uAuth,f8uAuth,f9uAuth } = require("../../controller/user/auth"),
     { isUser } = require("../../middleware/index");
 // @route to register page
 router.get('/register',(req,res)=>{
@@ -52,6 +52,18 @@ router.get('/logout',isUser,f3uAuth);
 router.get('/profile',isUser,f4uAuth);
 
 router.post('/profile',isUser,f5uAuth);
+
+// @route to get reset page
+router.get("/reset/:token",f7uAuth);
+
+// @route to send confirmation after email reset
+router.post("/reset/:token",f8uAuth);
+
+// @route to get recovery page
+router.get("/recoverypage",f9uAuth);
+
+// @route to send forgot password mail
+router.post("/forget",f6uAuth);
 
 
 module.exports = router;

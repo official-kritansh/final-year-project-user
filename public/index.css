@@ -104,10 +104,12 @@ body {
 .wrapper {	
 	margin-top: 80px;
   margin-bottom: 80px;
+  display: block;
+  margin: auto;
 }
 
 .form-signin {
-  max-width: 380px;
+  max-width: 400px;
   padding: 15px 35px 45px;
   margin: 0 auto;
   background-color: #fff;
@@ -141,3 +143,6 @@ body {
 	  border-top-right-radius: 0;
 	}
 
+#totheleft{
+    float: left;
+}
